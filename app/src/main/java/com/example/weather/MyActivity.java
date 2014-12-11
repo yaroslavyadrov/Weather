@@ -29,7 +29,7 @@ public class MyActivity extends Activity {
         setContentView(R.layout.activity_my);
         Im1 = (ImageView) findViewById(R.id.imageView2);
 
-        
+        ододдододо
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
 
 
