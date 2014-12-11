@@ -30,6 +30,7 @@ public class MyActivity extends Activity {
         Im1 = (ImageView) findViewById(R.id.imageView2);
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
 
+        здесь был юрик
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.init(config);
         DisplayImageOptions options = new DisplayImageOptions.Builder()
