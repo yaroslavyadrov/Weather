@@ -19,8 +19,8 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 public class MyActivity extends Activity {
     ListView LV;
-    String[] Sity={"Саранск","Москва","Пенза"};
-    String[] SityID={"Saransk,ru","Moscow,ru","Penza,ru"};
+    String[] Sity={"Саранск","Москва","Пенза","Лондон","Сидней","Ульяновск"};
+    String[] SityID={"Saransk,ru","Moscow,ru","Penza,ru","London,uk","Sydney,au","Ulyanovsk,ru"};
     ImageView Im1;
 
     @Override
@@ -37,7 +37,7 @@ public class MyActivity extends Activity {
                 .resetViewBeforeLoading(true)
                 .cacheOnDisk(true)
                 .build();
-        imageLoader.displayImage("http://risovach.ru/upload/2012/12/mem/pidrila-ebanaya_7033866_orig_.jpeg", Im1,options);
+        imageLoader.displayImage("http://samroid.ru/files/082013/Yandex_Weather_Mini.png", Im1,options);
         LV=(ListView) findViewById(R.id.listView);
         LV.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,Sity);

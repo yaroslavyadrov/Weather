@@ -34,9 +34,7 @@ import java.util.ArrayList;
 
 public class SecondClass extends Activity
 {
-    TextView cityname;
-    TextView tempmin;
-    TextView tempmax;
+    TextView cityname, tempmin, tempmax, netorbase;
     Handler hand;
     String strFromServ;
     JSONObject jsonFromServ;
@@ -51,6 +49,7 @@ public class SecondClass extends Activity
         cityname = (TextView) findViewById(R.id.textView);
         tempmin = (TextView) findViewById(R.id.textView10);
         tempmax = (TextView) findViewById(R.id.textView12);
+        netorbase = (TextView) findViewById(R.id.textView8);
         Intent SecAct = getIntent();
         img = (ImageView) findViewById(R.id.imageView);
 
@@ -73,11 +72,12 @@ public class SecondClass extends Activity
                 }
             }
         };
-
     }
     void getImage(String str){
-        String[][] values = {{"Clouds","Haze","Snow","Mist"},
-                {"http://yandex.st/weather/1.2.83/i/icons/48x48/ovc.png","","http://yandex.st/weather/1.2.83/i/icons/48x48/ovc_-sn.png","http://yandex.st/weather/1.2.83/i/icons/48x48/bkn_-ra_d.png"}};
+        String[][] values = {{"Clouds","Haze","Snow","Clear","Rain","Mist"},
+                {"http://yandex.st/weather/1.2.83/i/icons/48x48/ovc.png","http://yandex.st/weather/1.2.83/i/icons/48x48/ovc.png",
+                        "http://yandex.st/weather/1.2.83/i/icons/48x48/ovc_-sn.png","http://yandex.st/weather/1.2.83/i/icons/48x48/skc_d.png",
+                        "http://yandex.st/weather/1.2.83/i/icons/48x48/bkn_-ra_d.png", "http://yandex.st/weather/1.2.83/i/icons/48x48/ovc.png"}};
         String[] first = values[0];
         for (int i = 0; i<first.length; i++){
             if (str.equals(first[i])){
@@ -126,13 +126,13 @@ public class SecondClass extends Activity
 
     void getfromDatabase(String param){
         param = param.substring(0,param.length()-3);
-
         DatabaseHelper dbh = new DatabaseHelper(this);
         ArrayList<String> val = dbh.reload(param);
         cityname.setText(val.get(2));
         tempmin.setText(val.get(3));
         tempmax.setText(val.get(4));
         getImage(val.get(5));
+        netorbase.setText("из базы!!!");
     }
 
     void parseJSON (String str){
@@ -142,13 +142,14 @@ public class SecondClass extends Activity
             JSONArray weatherObject = jsonFromServ.getJSONArray("weather");
             cityname.setText(jsonFromServ.getString("name"));
             double TTmin,TTmax;
+            netorbase.setText("из сети!!!");
             TTmin = mainObject.getDouble("temp_min") - 272.15;
             tempmin.setText(String.valueOf(roundUp(TTmin, 1)));
             TTmax = mainObject.getDouble("temp_max") - 272.15;
             tempmax.setText(String.valueOf(roundUp(TTmax, 1)));
             JSONObject ww = weatherObject.getJSONObject(0);
             String sky = ww.getString("main");
-            WriteDB(0,jsonFromServ.getString("name"),mainObject.getDouble("temp_min") - 272.15,mainObject.getDouble("temp_max") - 272.15,
+            WriteDB(0,jsonFromServ.getString("name"),mainObject.getDouble("temp_max") - 272.15,mainObject.getDouble("temp_min") - 272.15,
                     ww.getString("main"));
             getImage(sky);
 
