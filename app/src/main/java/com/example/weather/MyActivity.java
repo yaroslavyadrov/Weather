@@ -28,6 +28,7 @@ public class MyActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
         Im1 = (ImageView) findViewById(R.id.imageView2);
+        hjgfkhjgkjhgkj
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
 
         ImageLoader imageLoader = ImageLoader.getInstance();
